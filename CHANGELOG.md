@@ -2,6 +2,23 @@
 
 All notable changes to the LaunchDarkly EventSource implementation for Java will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org).
 
+## [6.0.0](https://github.com/abhishekraha/okhttp-eventsource/compare/v5.0.1...6.0.0) (2026-10-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* RetryDelayStrategy.apply(long) and RetryDelayStrategy.Result are removed. Strategies now expose getDelayMillis() and getNext(), with withBaseDelayMillis(long) as the mutation channel for server-directed retry hints. EventSource.getBaseRetryDelayMillis() and getNextRetryDelayMillis() are also removed. EventSource gains activateRetryDelayStrategy(RetryDelayStrategy) to swap the active strategy at runtime, and Builder.retryDelayStrategy becomes additive: the first call sets the default and healthy-op reset target, later calls register additional strategies for activation.
+
+### Features
+
+* **deps:** bump okhttp to v4.12.0 ([8bf99de](https://github.com/abhishekraha/okhttp-eventsource/commit/8bf99deb06287a443070be70c9726923a21f43cf))
+* multi-strategy retry delay API for regime switching ([f19f3fd](https://github.com/abhishekraha/okhttp-eventsource/commit/f19f3fdabef29090830d2b9f1134e64dfc5c9a9b))
+
+
+### Bug Fixes
+
+* Close the response body when a stream stops ([#114](https://github.com/abhishekraha/okhttp-eventsource/issues/114)) ([0cf16fe](https://github.com/abhishekraha/okhttp-eventsource/commit/0cf16fe3ab91bddc02ec767be4557276d11ada89))
+
 ## [5.0.1](https://github.com/launchdarkly/okhttp-eventsource/compare/5.0.0...5.0.1) (2026-10-13)
 
 
